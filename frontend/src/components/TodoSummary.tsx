@@ -1,17 +1,12 @@
 import { Todo } from "../types/todos";
 
-interface TodoSummaryPropos {
+interface TodoSummaryProps {
   todos: Todo[];
+  deleteAllCompleted: () => void;
 }
 
-const TodoSummary = ({ todos }: TodoSummaryPropos) => {
+const TodoSummary = ({ todos, deleteAllCompleted }: TodoSummaryProps) => {
   const completedTodos = todos?.filter((todo) => todo.completed);
-
-  const deleteAllCompleted = async () => {
-    await fetch("/api/all-completed", {
-      method: "DELETE",
-    });
-  };
 
   return (
     <div className="text-center space-y-2">

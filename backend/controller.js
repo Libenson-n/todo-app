@@ -104,7 +104,8 @@ const completedTodo = async (req, res) => {
 const deleteCompletedTodos = async (req, res) => {
   try {
     await db.collection(TODOS_COLLECTION).deleteMany({ completed: true });
-    res.status(200).json({ status: 200 });
+    const todos = await db.collection(TODOS_COLLECTION).find().toArray();
+    res.status(200).json({ status: 200, todos });
   } catch (error) {
     console.error(error);
     res.status(500).json({

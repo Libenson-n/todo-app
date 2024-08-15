@@ -1,17 +1,30 @@
-# To-Do App with MERN Stack and Tailwind CSS
+# React + TypeScript + Vite
 
-## Overview
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-This project is a simple To-Do application built using the MERN stack (MongoDB, Express, React, Node.js) with TypeScript for type safety and Tailwind CSS for styling. The application allows users to create, read, and delete tasks.
+Currently, two official plugins are available:
 
-## Features
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- **Create, Read, Delete**: Manage your tasks effectively.
-- **Responsive Design**: Use Tailwind CSS for a responsive and modern UI.
+## Expanding the ESLint configuration
 
-## Technologies Used
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- **Frontend**: React with TypeScript, Tailwind CSS
-- **Backend**: Node.js, Express with TypeScript
-- **Database**: MongoDB
-- **Styling**: Tailwind CSS
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: ["./tsconfig.json", "./tsconfig.node.json", "./tsconfig.app.json"],
+    tsconfigRootDir: __dirname,
+  },
+};
+```
+
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list

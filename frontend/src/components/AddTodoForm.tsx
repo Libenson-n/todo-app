@@ -1,31 +1,19 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
-export const AddTodoForm = () => {
+interface AddTodoFormProps {
+  addNewTodo: (title: string) => void;
+}
+
+export const AddTodoForm = ({ addNewTodo }: AddTodoFormProps) => {
   const [input, setInput] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     if (!input.trim()) return;
 
-    onSubmit(input);
+    addNewTodo(input);
     setInput("");
-  };
-
-  const onSubmit = (input: string) => {
-    const todo = {
-      id: uuidv4(),
-      title: input,
-    };
-
-    fetch("api/todo", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(todo),
-    });
   };
 
   return (
