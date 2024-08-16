@@ -1,17 +1,18 @@
 import { createContext, useState } from "react";
+import { LoggedInUserContextType } from "../types/loggedInContext";
 
 type LoggedInUserProviderProps = {
   children: React.ReactNode;
 };
 
-type LoggedInUserContextType = {
-  loggedInUser: string;
-  login: (userId: string) => void;
-  logoutUser: () => void;
+const defaultContextValue: LoggedInUserContextType = {
+  loggedInUser: null,
+  logoutUser: () => {},
+  login: () => {},
 };
 
 export const LoggedInUserContext =
-  createContext<LoggedInUserContextType | null>(null);
+  createContext<LoggedInUserContextType>(defaultContextValue);
 
 const LoggedInUserProvider = ({ children }: LoggedInUserProviderProps) => {
   const [loggedInUser, setLoggedInUser] = useState<string>("");
