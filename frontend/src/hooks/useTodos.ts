@@ -1,23 +1,27 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Todo } from "../types/todos";
+import { LoggedInUserContext } from "../context/LoggedInUserContext";
 
 export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>();
+
+  const { loggedInUser } = useContext(LoggedInUserContext);
 
   useEffect(() => {
     fetchTodos();
   }, []);
 
   const fetchTodos = async () => {
-    const res = await fetch("/api/todos");
+    const res = await fetch(`/api/todos/${loggedInUser}`);
     const data = await res.json();
-    setTodos(data.todos);
+    setTodos(data.userTodos);
   };
 
   const addTodo = async (input: string) => {
     const todo = {
       id: uuidv4(),
+      userId: loggedInUser,
       title: input,
     };
 
